@@ -1,23 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import './App.css'; 
+import NavBar from './components/NavBar';
+import ItemListContainer from './components/ItemListContainer';
+import CartWidget from './components/CartWidget'; 
+import Item from './components/Item'; 
+import ItemCount from './components/ItemCount'; 
+import ItemDetail from './components/ItemDetail'; 
+import ItemDetailContainer from './components/ItemDetailContainer'; 
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <NavBar />
+      <ItemListContainer greeting="Bem-vindo à DomChiQ!" />
     </div>
   );
 }
