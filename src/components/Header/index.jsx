@@ -3,7 +3,6 @@ import { Person28Regular } from '@fluentui/react-icons';
 import NavBar from '../NavBar';
 import Button from '../Button';
 import logo from '../../images/Logo.jpg';
-import Search from '../Search'
 
 function Header() {
   return (
