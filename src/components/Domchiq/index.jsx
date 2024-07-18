@@ -2,6 +2,7 @@ import React from 'react';
 import { FaFacebook, FaInstagram, FaTiktok, FaTwitter } from 'react-icons/fa';
 import Search from '../Search';
 
+
 function Domchiq() {
   return (
     <div className='flex flex-col items-center justify-center p-5 bg-white'>
@@ -10,7 +11,7 @@ function Domchiq() {
         <h1>Bem vindos a DomChiq</h1>
       </div>
 
-      {/* Redes Sociais e Search */}
+      {/* Redes Sociais */}
       <div className='flex mt-2 space-x-4 items-center'>
         <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600">
           <FaFacebook size={24} />

@@ -4,7 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 
 function Search({ placeholder, className }) {
     const [search, setSearch] = useState("");
-
     const [searchParams, setSearchParams] = useSearchParams();
 
     const handleClick = () => {
