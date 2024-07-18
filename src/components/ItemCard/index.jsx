@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import Button from '../Button';
 import { useCart } from '../../context/CartProvider';
 
@@ -9,9 +11,14 @@ function ItemCard({ item }) {
   const [quantity, setQuantity] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selected, setSelected] = useState(null);
-  const { addToCart, cartQtd } = useCart(); 
+  const { addToCart, cartQtd } = useCart();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => setLoading(false), 2000); // Simula um carregamento de dados com um timeout de 2 segundos
+  }, []);
+
   function submit() {
-    // Lógica para adicionar ao carrinho com os dados do item e a quantidade
     addToCart({
       ...item,
       quantity
@@ -42,20 +49,28 @@ function ItemCard({ item }) {
   return (
     <div className='relative w-80 bg-white p-4 rounded-lg flex flex-col justify-between'>
       <>
-        <img
-          className='h-56 w-auto max-w-full object-contain rounded cursor-pointer'
-          src={item.imageUrl}
-          alt={item.name}
-          onClick={openModal}
-        />
+        {loading ? (
+          <Skeleton height={224} />
+        ) : (
+          <img
+            className='h-56 w-auto max-w-full object-contain rounded cursor-pointer'
+            src={item.imageUrl}
+            alt={item.name}
+            onClick={openModal}
+          />
+        )}
 
-        <h1 className='text-md text-slate-700 font-semibold mt-2'>{item.name}</h1>
-        <p className='text-xs text-slate-600'>{item.description}</p>
+        <h1 className='text-md text-slate-700 font-semibold mt-2'>
+          {loading ? <Skeleton width={180} /> : item.name}
+        </h1>
+        <p className='text-xs text-slate-600'>
+          {loading ? <Skeleton width={240} /> : item.description}
+        </p>
 
         <div className='flex justify-between items-center mt-5'>
           <div className='flex flex-col items-end'>
             <p className='text-lg text-black font-medium'>
-              {item.price?.toLocaleString('pt-BR', {
+              {loading ? <Skeleton width={100} /> : item.price?.toLocaleString('pt-BR', {
                 style: 'currency',
                 currency: 'BRL'
               })}
@@ -127,24 +142,24 @@ function ItemCard({ item }) {
               </div>
 
               {/* Quantidade de itens no carrinho */}
-              <p className='text-blue-500 font-bold mt-4'>Itens no Carrinho: {cartQtd()} </p>
+              <p className='text-blue-500 font-bold mt-4'>Itens no Carrinho: {cartQtd()}</p>
 
               {/* Seletor de Tamanho */}
               <div className='flex gap-2 items-center mt-2'>
                 <button
-                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'P' ? 'bg-gray-400' : ''}`}
+                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'P' ? 'bg-blue-500' : ''}`}
                   onClick={() => setSelected('P')}
                 >
                   P
                 </button>
                 <button
-                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'M' ? 'bg-gray-400' : ''}`}
+                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'M' ? 'bg-blue-500' : ''}`}
                   onClick={() => setSelected('M')}
                 >
                   M
                 </button>
                 <button
-                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'G' ? 'bg-gray-400' : ''}`}
+                  className={`bg-gray-200 text-black rounded px-3 py-1 text-xs cursor-pointer hover:bg-gray-400 ${selected === 'G' ? 'bg-blue-500' : ''}`}
                   onClick={() => setSelected('G')}
                 >
                   G
