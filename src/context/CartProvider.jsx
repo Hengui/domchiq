@@ -85,7 +85,7 @@ export default function CartProvider({ children }) {
     localStorage.setItem('cart', JSON.stringify(cart));
   }
 
-  // carregar o carrinho do localStorage ao montar
+  // Efeito para carregar o carrinho do localStorage ao montar
   useEffect(() => {
     const savedCart = localStorage.getItem('cart');
     if (savedCart) {

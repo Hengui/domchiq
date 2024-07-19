@@ -6,11 +6,13 @@ import './index.css'
 import './fonts/fonts.css';
 import CartProvider from './context/CartProvider';
 
+
 function App() {
   return (
       <CartProvider>
           <BrowserRouter>
               <Router />
+              <Toaster />
           </BrowserRouter>
       </CartProvider>
   );
