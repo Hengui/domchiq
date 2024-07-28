@@ -2,9 +2,7 @@ import React from 'react'
 
 function Orders() {
   return (
-    <div>Pedidos
-        {/* Pedidos */}
-    </div>
+    <div>Orders</div>
   )
 }
 
