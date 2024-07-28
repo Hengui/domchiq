@@ -3,7 +3,8 @@ import Domchiq from '../../components/Domchiq';
 import ItemCard from '../../components/ItemCard';
 import { useSearchParams } from 'react-router-dom';
 import db from '../../services/firebase';
-import { allProducts } from '../../mock/products'; // Importação corrigida
+import { allProducts } from '../../mock/products';
+import { collection, getDocs } from "firebase/firestore"; 
 
 function Inicio() {
   const [products, setProducts] = useState([]);
@@ -24,6 +25,15 @@ function Inicio() {
 
   useEffect(() => {
     setProducts(allProducts);
+  }, []);
+
+  useEffect(() => {
+    const ItemCollection = collection(db, "produtos");
+    getDocs(ItemCollection).then((snapshot) => {
+      setProducts(snapshot.docs.map((doc) => ({ ...doc.data() })));
+    }).catch((error) => {
+      console.error("Error fetching documents: ", error);
+    });
   }, []);
 
   useEffect(() => {
